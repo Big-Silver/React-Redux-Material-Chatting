@@ -1,0 +1,125 @@
+html{
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+body{
+	margin:0px;
+}
+
+a{
+	text-decoration: none;
+}
+/* ===== App ====== */ 
+/*.paper_dialog {
+	margin-top: 64px;	
+}*/
+.paper_home {
+	margin-left: 256px
+}
+
+.paper_dialog div {
+	box-shadow: 0 0 0 rgba(0,0,0,0.12), 0 0 0 rgba(0,0,0,0.12)! important
+}
+
+.paper_dialog div form {
+	text-align: center;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12)! important;
+	width: 500px;
+	height: 550px;
+	margin: 150px auto;
+}
+
+/* ===== Header ====== */ 
+.layout_header_bar #appbar_menu {
+	color: #fff;
+}
+
+/* ===== Sign In ===== */
+.form-title {
+	padding-top: 25px;
+	color: #32c5d2;
+}
+
+.sign_nav_space1 {
+	height: 25px;
+}
+
+.form-login button{
+	margin-left: -170px;
+}
+
+.forgot_password {
+	color: #00bcd4;
+	margin-right: -91px;
+}
+
+.sign_nav_space1_span {
+	height: 25px;
+	border-top: 1px outset;
+}
+
+.login_option {
+	margin: 0px auto;
+	width: 318px;
+}
+
+.login_option h4 {
+	font-weight: 600;
+	font-size: 15px;
+	color: #7d91aa!important;
+}
+
+.login_social_option li {
+	float: left;
+	display: inline;
+	list-style: none;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	text-indent: -9999px;
+}
+
+.login_social_option li .facebook {
+	background: url(./images/facebook.png);
+}
+
+.login_social_option li .googleplus {
+	background: url(./images/googleplus.png);
+}
+
+.login_social_option li>a {
+	cursor: pointer;
+	width: 28px;
+	height: 28px;
+	display: block;
+	-webkit-border-radius: 15px!important;
+}
+
+.login_creat_account {
+	margin: 0 -40px -30px;
+	padding: 15px 0 17px;
+	text-align: center;
+	background-color: #6c7a8d;
+	height: 100px;
+	width: 500px;
+	margin: 0;						
+}
+
+.login_creat_account p {
+	margin-top: 20px;
+}
+
+.login_creat_account p a {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 14px;
+	color: #c3cedd! important;
+}
+
+.back_login {
+	background-color: transparent! important;
+	border: 1px solid #00bcd4! important;
+}
+ 
+.back_login span {
+	color: #00bcd4! important;
+}

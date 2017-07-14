@@ -1,0 +1,17 @@
+.forget {
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12)! important;
+    width: 500px;
+    height: 320px! important;
+    margin: 150px auto;
+}
+
+.email-header {
+    width: 332px;
+    text-align: left! important;
+    margin: 42px auto 0px auto;
+}
+
+.forget .signup_submit {
+    margin-top: 30px;
+}

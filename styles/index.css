@@ -49,8 +49,9 @@ a{
 }
 
 .forgot_password {
-	color: #00bcd4;
+	color: #00bcd4! important;
 	margin-right: -91px;
+	cursor: pointer;
 }
 
 .sign_nav_space1_span {

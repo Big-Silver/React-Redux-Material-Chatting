@@ -86,6 +86,8 @@ class Signup extends Component {
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>
+				<div className="sign_nav_space1"></div>
+				<div className="sign_nav_space1"></div>
 				<div className="signup_submit">
 					<Grid>
 						<Row className="show-grid">

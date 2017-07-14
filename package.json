@@ -1,8 +1,8 @@
 {
   "name": "isomorphic-redux-app",
   "version": "0.1.1",
-  "apiHost": "130.211.9.79",
-  "apiPort": "5052",
+  "apiHost": "xxx.xxx.xxx.xxx",
+  "apiPort": "xxxx",
   "description": "An example of a isomorphic Redux application",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caljrimmer/isomorphic-redux-app.git"
+    "url": "git+https://github.com/Big-Silver/React-Redux-Material-UI.git"
   },
   "license": "MIT",
   "dependencies": {

@@ -8,6 +8,7 @@ import {GET_USER,
         LOGIN_GG_SUCCESS, LOGIN_GG_FAILURE, 
         GET_USER_INFO_FAILURE, GET_USER_INFO_SUCCESS, 
         REQUEST_EMAIL_SUCCESS, REQUEST_EMAIL_FAILURE,
+        RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILURE,
         LOGOUT, LOGOUT_SUCCESS, 
         CLEAR_COOKIE, 
         REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
@@ -76,7 +77,16 @@ export default function user(state = initialState, action) {
             });
             break;
         case REQUEST_EMAIL_FAILURE:
-            console.log("REQUEST_EMAIL_FAILURE");
+            return Object.assign({}, state, {
+                error: action.error.data.ResponseStatus.Message
+            });
+            break;
+        case RESET_PASSWORD_SUCCESS:
+            return Object.assign({}, state, {
+                reSetPassowrd: true
+            });
+            break;
+        case RESET_PASSWORD_FAILURE:
             return Object.assign({}, state, {
                 error: action.error.data.ResponseStatus.Message
             });

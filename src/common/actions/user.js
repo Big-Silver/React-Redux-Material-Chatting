@@ -27,6 +27,10 @@ export const REQUEST_EMAIL = 'REQUEST_EMAIL';
 export const REQUEST_EMAIL_SUCCESS = 'REQUEST_EMAIL_SUCCESS';
 export const REQUEST_EMAIL_FAILURE = 'REQUEST_EMAIL_FAILURE';
 
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORDL_FAILURE';
+
 export const LOGOUT = 'LOGOUT';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
@@ -98,6 +102,13 @@ export function requestEmail(email) {
 	return {
 		type: REQUEST_EMAIL,
 		promise: request.get(`${requestUrl}`, {UserEmail: email})
+	};
+}
+
+export function reSetPassword(email, code, password) {
+	return {
+		type: RESET_PASSWORD,
+		promise: request.push(`http://${config.apiHost}/user/reset`, {UserEmail: email, ResetCode: code, Password: password})
 	};
 }
 

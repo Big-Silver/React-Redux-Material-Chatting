@@ -106,7 +106,7 @@ class Login extends Component {
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1_span"></div>
 				<div className="sign_nav_space1"></div>
-				<div className="login_option">
+				{/* <div className="login_option">
 					<Grid>
 						<Row className="show-grid">
 							<Col xs={5} md={5} sm={5}>
@@ -120,7 +120,7 @@ class Login extends Component {
 							</Col>
 						</Row>
 					</Grid>															
-				</div>
+				</div> */}
 				<div className="sign_nav_space1"></div>
 				<div className="login_creat_account">
 					<p><a onClick={this.onSetSign}>SIGN UP FOR ACCOUNT</a></p>

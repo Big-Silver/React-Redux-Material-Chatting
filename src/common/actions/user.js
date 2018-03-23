@@ -1,4 +1,5 @@
 import request from 'axios';
+import Querystring from 'querystring';
 import config from '../../../package.json';
 
 export const REGISTER_USER = 'REGISTER_USER';
@@ -41,6 +42,13 @@ export const SET_SIGN = 'SET_SIGN';
 
 export const CLEAR_COOKIE = 'CLEAR_COOKIE';
 
+var http_config = {
+	headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/x-www-form-urlencoded',
+	}
+};
+
 export function getUser(value) {
   return {
     type: SET_LOGIN,
@@ -70,16 +78,24 @@ export function getUserInfo(user) {
 }
 
 export function createUser(email, password) {
+	var data = Querystring.stringify({
+		"email": email,
+		"password": password
+	});
 	return {
 		type: REGISTER_USER,
-		promise: request.post(`http://${config.apiHost}/user/register`, {useremail:email,password:password})
-	}
+		promise: request.post(`http://${config.apiHost}:${config.apiPort}/register`, data, http_config)
+	};
 }
 
-export function auth(username, password) {
+export function auth(email, password) {
+	var data = Querystring.stringify({ 
+		"email": email,
+		"password": password
+	});
 	return {
 		type: LOGIN,
-		promise: request.post(`http://${config.apiHost}/auth`, {UserName:username,Password:password})
+		promise: request.post(`http://${config.apiHost}:${config.apiPort}/login`, data, http_config)
 	};
 }
 

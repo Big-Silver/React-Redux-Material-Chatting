@@ -1,8 +1,8 @@
 {
   "name": "isomorphic-redux-app",
   "version": "0.1.1",
-  "apiHost": "xxx.xxx.xxx.xxx",
-  "apiPort": "xxxx",
+  "apiHost": "localhost",
+  "apiPort": "3000",
   "description": "An example of a isomorphic Redux application",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
@@ -30,6 +30,8 @@
     "lodash.merge": "^4.0.1",
     "lodash.throttle": "^4.0.0",
     "material-ui": "^0.14.2",
+    "mongodb": "^3.0.4",
+    "querystring": "^0.2.0",
     "react": "^0.14.9",
     "react-addons-create-fragment": "^0.14.6",
     "react-addons-css-transition-group": "^15.6.0",

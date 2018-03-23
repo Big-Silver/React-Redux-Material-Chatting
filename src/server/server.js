@@ -24,7 +24,20 @@ import {getUserInfo} from '../common/actions/user';
 
 
 const app = express();
+// const MongoClient = require('mongodb').MongoClient;
+// const assert = require('assert');
 
+// const url = 'mongodb://users:user1992@ds157723.mlab.com:57723/userauth';
+// const dbName = 'userauth';
+
+// MongoClient.connect(url, function(err, client) {
+//   assert.equal(null, err);
+//   console.log("Connected successfully to server");
+ 
+//   const db = client.db(dbName);
+ 
+//   client.close();
+// });
 
 const renderFullPage = (html, initialState, head) => {
   return `
@@ -64,11 +77,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get('/get_user', function (req, res) {
+  console.log('get_user')
+  res.send('Hello World');
+})
+
 app.get('/*', function (req, res) {
   const location = createLocation(req.url);
 
   getUser(req.cookies.token || false, user => {
-    // console.log(user);
+    console.log(user);
     match({ routes, location }, (err, redirectLocation, renderProps) => {
 
         if(err) {
@@ -118,6 +136,7 @@ app.get('/*', function (req, res) {
   );
 
 });
+
 
 const server = app.listen(3002, function () {
   const port = server.address().port;

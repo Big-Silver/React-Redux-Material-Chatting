@@ -114,17 +114,28 @@ export function authGG() {
 }
 
 export function requestEmail(email) {
-	var requestUrl = `http://${config.apiHost}/user/reset?UserEmail=` + encodeURIComponent(email);
+	var requestUrl = `http://${config.apiHost}:${config.apiPort}/reset?email=` + encodeURIComponent(email);
 	return {
 		type: REQUEST_EMAIL,
-		promise: request.get(`${requestUrl}`, {UserEmail: email})
+		promise: request.get(`${requestUrl}`)
 	};
 }
 
 export function reSetPassword(email, code, password) {
+	/* Server sent the code */
+
+	// return {
+	// 	type: RESET_PASSWORD,
+	// 	promise: request.push(`http://${config.apiHost}/user/reset`, {UserEmail: email, ResetCode: code, Password: password})
+	// };
+
+	var data = Querystring.stringify({
+		"email": email,
+		"password": password
+	});
 	return {
 		type: RESET_PASSWORD,
-		promise: request.push(`http://${config.apiHost}/user/reset`, {UserEmail: email, ResetCode: code, Password: password})
+		promise: request.push(`http://${config.apiHost}:${config.apiPort}/reset`, data, http_config)
 	};
 }
 

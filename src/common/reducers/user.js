@@ -42,9 +42,9 @@ export default function user(state = initialState, action) {
             }
             break;
         case LOGIN_FAILURE:
-            return Object.assign({}, state, {
-                error: action.error.data.ResponseStatus.Message
-            });
+            // return Object.assign({}, state, {
+            //     error: action.error.data.ResponseStatus.Message
+            // });
             break;
         case LOGIN_FB_SUCCESS:						
             console.log("facebook login")		
@@ -67,9 +67,9 @@ export default function user(state = initialState, action) {
             }		
             break;
         case REGISTER_USER_FAILURE:
-            return Object.assign({}, state, {
-                error: action.error.data.ResponseStatus.Message
-            });
+            // return Object.assign({}, state, {
+            //     error: action.error.data.ResponseStatus.Message
+            // });
             break;
         case REQUEST_EMAIL_SUCCESS:
             return Object.assign({}, state, {
@@ -87,23 +87,15 @@ export default function user(state = initialState, action) {
             });
             break;
         case RESET_PASSWORD_FAILURE:
-            return Object.assign({}, state, {
-                error: action.error.data.ResponseStatus.Message
-            });
+            // return Object.assign({}, state, {
+            //     error: action.error.data.ResponseStatus.Message
+            // });
             break;
         case GET_USER_INFO_SUCCESS:
             return Object.assign({}, state, {
                 info: action.req.data
             });
             break;
-        // case LOGOUT_SUCCESS:            
-        //     return Object.assign({}, state, {
-        //        info: null,
-        //        token: null,
-        //        userId: null,
-        //        clearCookie: true
-        //     });
-        //     break;
         case CLEAR_COOKIE:
             return Object.assign({}, state, {
                 clearCookie: false

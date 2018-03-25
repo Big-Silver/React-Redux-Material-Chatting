@@ -71,8 +71,10 @@ class Forget extends Component {
 }
 
 function mapStateToProps(state) {
+	const request = state.user.requestEmail;
 	return {
-
+		user : state.user,
+		requestEmail: request	
 	};
 }
 

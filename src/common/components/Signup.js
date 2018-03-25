@@ -39,12 +39,15 @@ class Signup extends Component {
 		event.preventDefault();
 		const password = this.refs.password.getValue();
 		const email = this.refs.email.getValue();    
-		this.setState({
-			email: email,
-			password: password
-		})
-		this.props.createUser(email, password);
-		// this.props.dispatch(createUser(email, password));
+		const confirm_password = this.refs.confirm_password.getValue();
+		if (email == confirm_password) {
+			this.setState({
+				email: email,
+				password: password
+			})
+			this.props.createUser(email, password);
+			// this.props.dispatch(createUser(email, password));
+		}		
 	}
 
 	gotoLogin() {
@@ -65,6 +68,13 @@ class Signup extends Component {
 				<Helmet title="Signup page"/>
 				<h3 className="form-title">Sign Up</h3>
 				<TextField
+					name="username"
+					style={{textAlign:'left'}}
+					ref="username"
+					hintText="UserName"
+					floatingLabelText="UserName"
+				/><br/>
+				<TextField
 					name="email"
 					style={{textAlign:'left'}}
 					ref="email"
@@ -79,12 +89,17 @@ class Signup extends Component {
 					type="password"
 					errorText={this.props.user.error}
 				/><br/>
+				<TextField
+					name="confirm_password"
+					ref="confirm_password"
+					hintText="Enter your confirm password"
+					floatingLabelText="Confirm Password"
+					type="password"
+					errorText={this.props.user.error}
+				/><br/>
 				{isRegisteredValue  && (
 					this.gotoLogin()
 				)}
-				<div className="sign_nav_space1"></div>
-				<div className="sign_nav_space1"></div>
-				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>

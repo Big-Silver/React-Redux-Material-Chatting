@@ -13,6 +13,7 @@ import {GET_USER,
         CLEAR_COOKIE, 
         REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
         SET_LOGIN, SET_SIGN,
+        INIT_MESSAGE, INIT_MESSAGE_SUCCESS, INIT_MESSAGE_FAILURE
         } from '../actions/user';
 
 const initialState = { signed: false, logged: false, login: false, sign: false };
@@ -27,6 +28,11 @@ export default function user(state = initialState, action) {
             return true;
             break;
         case LOGIN_SUCCESS:
+            var user_session = sessionStorage.getItem('rChat_user');
+            if (!user_session) {
+                sessionStorage.setItem('rChat_user', action.req.data[0]._id);
+                sessionStorage.setItem('rUser_name', action.req.data[0].name);
+            }
             // return Object.assign({}, state, {
             //     error: null,
             //     userId: action.req.data.UserId,
@@ -42,9 +48,9 @@ export default function user(state = initialState, action) {
             }
             break;
         case LOGIN_FAILURE:
-            // return Object.assign({}, state, {
-            //     error: action.error.data.ResponseStatus.Message
-            // });
+            return Object.assign({}, state, {
+                error: 'Login is Failed.'
+            });
             break;
         case LOGIN_FB_SUCCESS:						
             console.log("facebook login")		
@@ -60,16 +66,21 @@ export default function user(state = initialState, action) {
         case LOGIN_GG_FAILURE:						
             console.log("google fail")		
             break;
-        case REGISTER_USER_SUCCESS:						
+        case REGISTER_USER_SUCCESS:
+            var user_session = sessionStorage.getItem('rChat_user');
+            if (!user_session) {
+                sessionStorage.setItem('rChat_user', action.req.data._id);
+                sessionStorage.setItem('rUser_name', action.req.data.name);
+            }			
             return {
                 logged: true,
                 signed: true
             }		
             break;
         case REGISTER_USER_FAILURE:
-            // return Object.assign({}, state, {
-            //     error: action.error.data.ResponseStatus.Message
-            // });
+            return Object.assign({}, state, {
+                error: 'Register is Failed.'
+            });
             break;
         case REQUEST_EMAIL_SUCCESS:
             return Object.assign({}, state, {
@@ -111,7 +122,23 @@ export default function user(state = initialState, action) {
                 sign: true
             });
             break;
-        case LOGOUT:            
+        case INIT_MESSAGE:
+            console.log("INIT_MESSAGE");
+            return true;
+            break;
+        case INIT_MESSAGE_SUCCESS:
+            return {
+                logged: true,
+                messages: action.req.data
+            }
+            break;
+        case INIT_MESSAGE_FAILURE:
+            return Object.assign({}, state, {
+                error: 'Message is Failed.'
+            });
+            break;
+        case LOGOUT:
+            sessionStorage.clear();
             return Object.assign({}, state, {
                 info: null,
                 token: null,

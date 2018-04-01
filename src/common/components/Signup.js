@@ -37,15 +37,17 @@ class Signup extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
+
+		const username = this.refs.username.getValue();
+		const email = this.refs.email.getValue();
 		const password = this.refs.password.getValue();
-		const email = this.refs.email.getValue();    
 		const confirm_password = this.refs.confirm_password.getValue();
-		if (email == confirm_password) {
+		if (password == confirm_password) {		
 			this.setState({
 				email: email,
 				password: password
 			})
-			this.props.createUser(email, password);
+			this.props.createUser(username, email, password);
 			// this.props.dispatch(createUser(email, password));
 		}		
 	}
@@ -119,15 +121,6 @@ class Signup extends Component {
 		);
 	}
 }
-
-// Signup.propTypes = {
-// 	email: PropTypes.string.isRequired,
-// 	username: PropTypes.string.isRequired,
-// 	password: PropTypes.string,
-// 	logged: PropTypes.bool.isRequired,
-// 	token: PropTypes.string,
-// 	err: PropTypes.object
-// };
 
 function mapStateToProps(state) {
 	// console.log(state);

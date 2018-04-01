@@ -8,7 +8,10 @@ import classNames from 'classnames';
 
 import * as UserActions from '../actions/user';
 
-require('./Home/home.css');
+import MessagesList from "./MessagesList"
+import AddMessage from "./AddMessage"
+
+require('./style/home.css');
 
 class Home extends Component {
 
@@ -18,16 +21,19 @@ class Home extends Component {
 
   componentWillReceiveProps(nextProps) {
 		if(!nextProps.user.logged){
-				this.props.history.pushState(null, "/");
+      this.props.history.pushState(null, "/");
 		}
 	}
 
   render() {
     return (
-        <div className="home-page">
-          <Helmet title="Home page"/>
-          Redux Shipping Tool
-        </div>
+      <div className="home-page">
+        <Helmet title="Home page"/>
+        <section id="main">
+          <MessagesList />
+          {/* <AddMessage /> */}
+        </section>
+      </div>
     );
   }
 }

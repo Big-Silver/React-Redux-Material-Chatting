@@ -30,7 +30,7 @@ export const REQUEST_EMAIL_FAILURE = 'REQUEST_EMAIL_FAILURE';
 
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
-export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORDL_FAILURE';
+export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
 
 export const LOGOUT = 'LOGOUT';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -41,6 +41,10 @@ export const SET_LOGIN = 'SET_LOGIN';
 export const SET_SIGN = 'SET_SIGN';
 
 export const CLEAR_COOKIE = 'CLEAR_COOKIE';
+
+export const INIT_MESSAGE = 'INIT_MESSAGE';
+export const INIT_MESSAGE_SUCCESS = 'INIT_MESSAGE_SUCCESS';
+export const INIT_MESSAGE_FAILURE = 'INIT_MESSAGE_FAILURE';
 
 var http_config = {
 	headers: {
@@ -77,8 +81,9 @@ export function getUserInfo(user) {
 	};
 }
 
-export function createUser(email, password) {
+export function createUser(username, email, password) {
 	var data = Querystring.stringify({
+		"name": username,
 		"email": email,
 		"password": password
 	});
@@ -149,5 +154,12 @@ export function logout(user) {
 export function toogleClearCookie() {
 	return {
 		type: CLEAR_COOKIE
+	};
+}
+
+export function init_message() {
+	return {
+		type: INIT_MESSAGE,
+		promise: request.get(`http://${config.apiHost}:${config.apiPort}/message`, http_config)
 	};
 }

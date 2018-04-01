@@ -79,9 +79,9 @@ class App extends Component {
                 </Col>
               </Row>
             </Grid>
-            <div className="paper_home">
+            {/* <div className="paper_home">
               {user.logged && <Home />} 
-            </div>			               
+            </div>			                */}
             {/*{this.props.children}*/}
           </Paper>
         </div>

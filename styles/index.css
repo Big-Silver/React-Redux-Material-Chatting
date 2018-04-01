@@ -13,7 +13,7 @@ a{
 /*.paper_dialog {
 	margin-top: 64px;	
 }*/
-.paper_home {
+.home-page {
 	margin-left: 256px
 }
 
@@ -123,4 +123,25 @@ a{
  
 .back_login span {
 	color: #00bcd4! important;
+}
+
+#main {
+    grid-area: main;
+}
+#new-message {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    margin-left: 0px;
+    border-top: 1px solid #3f3f3f;
+}
+#messages-list {
+    padding: 5px 0 0 5px;
+}
+#sidebar {
+    grid-area: sidebar;
+    padding: 5px 0 0 5px;
+    border-right: 1px solid #3f3f3f;
+    height: 100%;
 }

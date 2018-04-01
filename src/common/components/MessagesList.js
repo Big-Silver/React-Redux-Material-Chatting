@@ -44,7 +44,34 @@ class MessagesList extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.state.messages = this.props.user.messages;
-        console.log('messages: ', this.state.messages)
+        var msgs = this.props.user.messages;
+        var total_group = [];
+        var msg_group = [];
+        var group_date = 0;
+        setTimeout(() => {
+            for(var i = 0; i < msgs.length; i++) {
+                var d = new Date(msgs[i].date);
+                if (msg_group == []) {
+                    msg_group.push(msgs[i]);
+                    group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
+                } else {
+                    if (group_date == (d.getTime() / (1000 * 24 * 3600)).toFixed(0)) {
+                        msg_group.push(msgs[i])
+                    } else {
+                        total_group.push(
+                            {
+                                'date' : (d.getTime() / (1000 * 24 * 3600)).toFixed(0),
+                                'value' : msg_group
+                            }
+                        );
+                        msg_group = [];
+                        msg_group.push(msgs[i]);
+                        group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
+                    }
+                }        
+            }
+            console.log('message: ', total_group);        
+        }, 100);
     };
 
     render() {

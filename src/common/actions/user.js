@@ -5,7 +5,6 @@ import config from '../../../package.json';
 export const REGISTER_USER = 'REGISTER_USER';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
-export const GET_USER = 'GET_USER';
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -20,7 +19,6 @@ export const LOGIN_GGSUCCESS = 'LOGIN_GG_SUCCESS';
 export const LOGIN_GG_FAILURE = 'LOGIN_GG_FAILURE';
 
 export const GET_USER_INFO = 'GET_USER_INFO';
-export const GET_USER_INFO_REQUEST = 'GET_USER_INFO_REQUEST';
 export const GET_USER_INFO_SUCCESS = 'GET_USER_INFO_SUCCESS';
 export const GET_USER_INFO_FAILURE = 'GET_USER_INFO_FAILURE';
 
@@ -37,14 +35,19 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-export const SET_LOGIN = 'SET_LOGIN';
-export const SET_SIGN = 'SET_SIGN';
-
 export const CLEAR_COOKIE = 'CLEAR_COOKIE';
 
 export const INIT_MESSAGE = 'INIT_MESSAGE';
 export const INIT_MESSAGE_SUCCESS = 'INIT_MESSAGE_SUCCESS';
 export const INIT_MESSAGE_FAILURE = 'INIT_MESSAGE_FAILURE';
+
+export const INIT_WORKSPACE = 'INIT_WORKSPACE';
+export const INIT_WORKSPACE_SUCCESS = 'INIT_WORKSPACE_SUCCESS';
+export const INIT_WORKSPACE_FAILURE = 'INIT_WORKSPACE_FAILURE';
+
+export const CREATE_WORKSPACE = 'CREATE_WORKSPACE';
+export const CREATE_WORKSPACE_SUCCESS = 'CREATE_WORKSPACE_SUCCESS';
+export const CREATE_WORKSPACE_FAILURE = 'CREATE_WORKSPACE_FAILURE';
 
 var http_config = {
 	headers: {
@@ -53,39 +56,19 @@ var http_config = {
 	}
 };
 
-export function getUser(value) {
-  return {
-    type: SET_LOGIN,
-    payload: value
-  };
-}
-
-export function onSetSign(value) {
-  return {
-    type: SET_SIGN,
-    payload: value
-  };
-}
-
-export function onSetLogin(value) {
-  return {
-    type: SET_LOGIN,
-    payload: value
-  };
-}
-
-export function getUserInfo(user) {
+export function getUserInfo() {
 	return {
 		type: GET_USER_INFO,
-		promise: request.get(`http://${config.apiHost}:${config.apiPort}/api/users/${user.userId}?access_token=${user.token}`)
+		promise: request.get(`http://${config.apiHost}:${config.apiPort}/users`, http_config)
 	};
 }
 
-export function createUser(username, email, password) {
+export function createUser(username, email, password, ws_Id) {
 	var data = Querystring.stringify({
 		"name": username,
 		"email": email,
-		"password": password
+		"password": password,
+		"workspace": ws_Id
 	});
 	return {
 		type: REGISTER_USER,
@@ -93,8 +76,9 @@ export function createUser(username, email, password) {
 	};
 }
 
-export function auth(email, password) {
-	var data = Querystring.stringify({ 
+export function auth(email, password, wsId) {
+	var data = Querystring.stringify({
+		"workspaceId": wsId, 
 		"email": email,
 		"password": password
 	});
@@ -162,4 +146,24 @@ export function init_message() {
 		type: INIT_MESSAGE,
 		promise: request.get(`http://${config.apiHost}:${config.apiPort}/message`, http_config)
 	};
+}
+
+export function create_workspace(infos) {
+	var data = Querystring.stringify({
+		"name": infos.displayName,
+		"fullName": infos.fullName,
+		"admin": infos.email,
+		"password" :infos.password
+	});
+	return {
+		type: CREATE_WORKSPACE,
+		promise: request.post(`http://${config.apiHost}:${config.apiPort}/create_workspace`, data, http_config)
+	}
+}
+
+export function init_workspaces() {
+	return {
+		type: INIT_WORKSPACE,
+		promise: request.get(`http://${config.apiHost}:${config.apiPort}/init_workspaces`, http_config)
+	}
 }

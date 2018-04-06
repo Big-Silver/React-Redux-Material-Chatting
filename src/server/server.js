@@ -20,7 +20,6 @@ import packagejson from '../../package.json';
 import Helmet from 'react-helmet';
 
 import {connect} from 'react-redux';
-import {getUserInfo} from '../common/actions/user';
 
 
 const app = express();
@@ -76,11 +75,6 @@ app.use(function(req, res, next) {
   }
   next();
 });
-
-app.get('/get_user', function (req, res) {
-  console.log('get_user')
-  res.send('Hello World');
-})
 
 app.get('/*', function (req, res) {
   const location = createLocation(req.url);

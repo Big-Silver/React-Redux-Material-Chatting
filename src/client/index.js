@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { ReduxRouter, Router, IndexRoute, Route, RouterContext, browserHistory } from 'react-router';
 import { compose, createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import cookie from 'react-cookie';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
@@ -22,10 +23,12 @@ import SignupPage from "../common/containers/SignupPage";
 import ForgetPage from "../common/containers/ForgetPage";
 import ResetPage from "../common/containers/ResetPage";
 import HomePage from "../common/components/Home";
+import WorkSpace from "../common/components/WorkSpace";
 
 import promiseMiddleware from '../common/api/promiseMiddleware';
 
 import reducer from '../common/reducers/reducer';
+// import { watcherSaga } from "../common/sagas/sagas";
 
 import "../../styles/index.css";
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -33,14 +36,18 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 const initialState = window.__INITIAL_STATE__;
 // const store = configureStore(initialState);
 const rootElement = document.getElementById('root');
+const sagaMiddleware = createSagaMiddleware();
 const loggerMiddleware = createLogger();
 const routeMiddleware = routerMiddleware(browserHistory);
 const store = createStore(reducer, {}, compose(applyMiddleware(
     promiseMiddleware,
 	routeMiddleware,
 	loggerMiddleware,
-	thunkMiddleware
+	thunkMiddleware,
+    sagaMiddleware
 ), window.devToolsExtension ? window.devToolsExtension() : f => f));
+
+// sagaMiddleware.run(watcherSaga);
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -64,7 +71,8 @@ ReactDOM.render(
     <Provider store={store}>
             <Router history={history}>
                 <Route path="/" component={ExternalLayout}>
-                    <IndexRoute component={LoginPage} onEnter={unRequireAuth}/>
+                    <IndexRoute component={WorkSpace} onEnter={unRequireAuth}/>
+                    <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={SignupPage} />
                     <Route path="/forget_password" component={ForgetPage} />
                     <Route path="/reset_password" component={ResetPage} />

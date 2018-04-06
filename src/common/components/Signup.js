@@ -37,7 +37,9 @@ class Signup extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
-
+		const search = this.props.location.search;
+		const params = new URLSearchParams(search);
+		const workspaceId = params.get('workspaceId');
 		const username = this.refs.username.getValue();
 		const email = this.refs.email.getValue();
 		const password = this.refs.password.getValue();
@@ -47,8 +49,7 @@ class Signup extends Component {
 				email: email,
 				password: password
 			})
-			this.props.createUser(username, email, password);
-			// this.props.dispatch(createUser(email, password));
+			this.props.createUser(username, email, password, workspaceId);
 		}		
 	}
 
@@ -58,7 +59,6 @@ class Signup extends Component {
 
 	onSetLogin() {
 		this.props.history.pushState(null, "/");
-		// this.props.onSetLogin();
 	}
 
 	render() {
@@ -112,7 +112,7 @@ class Signup extends Component {
 								<RaisedButton className="back_login"label="Back" secondary={true} onClick={this.onSetLogin} onTouchTap={this.onSetLogin}/>
 							</Col>
 							<Col xs={6} md={6} sm={6}>
-								<RaisedButton label="Submit" secondary={true} onClick={this.onSubmit} onTouchTap={this.onSubmit}/>
+								<RaisedButton label="Submit" secondary={true} onClick={this.onSubmit}/>
 							</Col>
 						</Row>
 					</Grid>															

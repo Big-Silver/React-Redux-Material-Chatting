@@ -7,6 +7,7 @@ import SignupPage from "./containers/SignupPage";
 
 import Dashboard from './components/personal/Dashboard';
 //Redux Dumb
+import WorkSpace from "./components/WorkSpace";
 import HomePage from "./components/Home";
 import AboutPage from "./components/About";
 import error404 from "./components/404";
@@ -31,6 +32,7 @@ function unRequireAuth() {
 
 export default (
     <Route name="app" path="/" component={App}>
+        <Route path="workspace" component={WorkSpace} />
         <Route path="home" component={HomePage} onEnter={requireAuth}/>
         <Route path="dashboard" component={Dashboard} />
         <Route path="about" component={AboutPage} />

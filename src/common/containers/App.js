@@ -30,9 +30,9 @@ class App extends Component {
       console.log('Setting up token in cookie');
       cookie.save('token', nextState.user.token);
     }
-    if(nextState.user.token && !nextState.user.info) {
-      this.props.getUserInfo(nextState.user);
-    }
+    // if(nextState.user.token && !nextState.user.info) {
+    //   this.props.getUserInfo(nextState.user);
+    // }
 
     if(nextState.user.clearCookie && cookie.load('token')) {
       cookie.remove('token');

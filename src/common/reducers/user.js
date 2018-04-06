@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import * as UserActions from '../actions/user';
 import { auth } from '../actions/user';
-import {GET_USER, 
+import {
         LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
         LOGIN_FB_SUCCESS, LOGIN_FB_FAILURE,
         LOGIN_GG_SUCCESS, LOGIN_GG_FAILURE, 
@@ -13,18 +13,16 @@ import {GET_USER,
         CLEAR_COOKIE, 
         REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
         SET_LOGIN, SET_SIGN,
-        INIT_MESSAGE, INIT_MESSAGE_SUCCESS, INIT_MESSAGE_FAILURE
+        INIT_MESSAGE, INIT_MESSAGE_SUCCESS, INIT_MESSAGE_FAILURE,
+        CREATE_WORKSPACE, CREATE_WORKSPACE_SUCCESS, CREATE_WORKSPACE_FAILURE,
+        INIT_WORKSPACE, INIT_WORKSPACE_SUCCESS, INIT_WORKSPACE_FAILURE
         } from '../actions/user';
 
 const initialState = { signed: false, logged: false, login: false, sign: false };
 
 export default function user(state = initialState, action) {
     switch (action.type) {
-        case GET_USER:
-            return state;
-            break;
         case LOGIN_REQUEST:
-            console.log("LOGIN_REQUEST");
             return true;
             break;
         case LOGIN_SUCCESS:
@@ -33,16 +31,6 @@ export default function user(state = initialState, action) {
                 sessionStorage.setItem('rChat_user', action.req.data[0]._id);
                 sessionStorage.setItem('rUser_name', action.req.data[0].name);
             }
-            // return Object.assign({}, state, {
-            //     error: null,
-            //     userId: action.req.data.UserId,
-            //     sessionId: action.req.data.SessionId,
-            //     userName: action.req.data.UserName,
-            //     displayName: action.req.data.DisplayName,
-            //     responseStatus: action.req.data.ResponseStatus,
-						// 		logged: true,
-            //     updateCookie: true
-            // });
             return {
                 logged: true
             }
@@ -75,7 +63,7 @@ export default function user(state = initialState, action) {
             return {
                 logged: true,
                 signed: true
-            }		
+            }
             break;
         case REGISTER_USER_FAILURE:
             return Object.assign({}, state, {
@@ -104,7 +92,12 @@ export default function user(state = initialState, action) {
             break;
         case GET_USER_INFO_SUCCESS:
             return Object.assign({}, state, {
-                info: action.req.data
+                users: action.req.data[0]
+            });
+            break;
+        case GET_USER_INFO_FAILURE:
+            return Object.assign({}, state, {
+                error: 'Getting user_info is Failed.'
             });
             break;
         case CLEAR_COOKIE:
@@ -136,6 +129,26 @@ export default function user(state = initialState, action) {
             return Object.assign({}, state, {
                 error: 'Message is Failed.'
             });
+            break;
+        case CREATE_WORKSPACE_SUCCESS:
+            return {
+                created_ws: action.req.data
+            }
+            break;
+        case CREATE_WORKSPACE_FAILURE:
+            return Object.assign({}, state, {
+                error: 'Creating the workspace is Failed.'
+            });
+            break;
+        case INIT_WORKSPACE_SUCCESS:
+            return {
+                workspaces: action.req.data
+            }
+            break;
+        case INIT_WORKSPACE_FAILURE:
+            return Object.assign({}, state, {
+                error: 'Getting Workspace is Failed.'
+            })
             break;
         case LOGOUT:
             sessionStorage.clear();

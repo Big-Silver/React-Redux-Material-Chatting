@@ -43,33 +43,45 @@ class MessagesList extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        this.state.messages = this.props.user.messages;
+        this.setState({
+            messages: this.props.user.messages
+        });
         var msgs = this.props.user.messages;
         var total_group = [];
         var msg_group = [];
         var group_date = 0;
         setTimeout(() => {
-            for(var i = 0; i < msgs.length; i++) {
-                var d = new Date(msgs[i].date);
-                if (msg_group == []) {
-                    msg_group.push(msgs[i]);
-                    group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
-                } else {
-                    if (group_date == (d.getTime() / (1000 * 24 * 3600)).toFixed(0)) {
-                        msg_group.push(msgs[i])
+            if (typeof msgs != 'undefined') {
+                for(var i = 0; i < msgs.length; i++) {
+                    var d = new Date(msgs[i].date);
+                    if (msg_group.length == 0) {
+                        msg_group.push(msgs[i]);
+                        group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
                     } else {
+                        if (group_date == (d.getTime() / (1000 * 24 * 3600)).toFixed(0)) {
+                            msg_group.push(msgs[i])
+                        } else {
+                            total_group.push(
+                                {
+                                    'date' : (d.getTime() / (1000 * 24 * 3600)).toFixed(0),
+                                    'value' : msg_group
+                                }
+                            );
+                            msg_group = [];
+                            msg_group.push(msgs[i]);
+                            group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
+                        }
+                    }
+                    if (i == msgs.length - 1) {
                         total_group.push(
                             {
-                                'date' : (d.getTime() / (1000 * 24 * 3600)).toFixed(0),
+                                'date' : group_date,
                                 'value' : msg_group
                             }
                         );
-                        msg_group = [];
-                        msg_group.push(msgs[i]);
-                        group_date = (d.getTime() / (1000 * 24 * 3600)).toFixed(0);
                     }
-                }        
-            }
+                }
+            }            
             console.log('message: ', total_group);        
         }, 100);
     };
@@ -79,7 +91,7 @@ class MessagesList extends Component {
             <div className="row">
                 <div className="col-12">
                     <div className="messages">
-                        {this.state.messages.map(message => {
+                        {this.state.messages != [] && this.state.messages.map(message => {
                             return (
                                 <div>{message.user}: {message.message} : {message.date}</div>
                             )
@@ -97,7 +109,6 @@ class MessagesList extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('state: ', state)
     return {
         user: state.user
 	};

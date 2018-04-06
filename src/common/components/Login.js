@@ -34,14 +34,22 @@ class Login extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+		const search = this.props.location.search;
+		const params = new URLSearchParams(search);
+		const workspaceId = params.get('workspaceId');
     const username = this.refs.email.getValue();
     const password = this.refs.password.getValue();
-    this.props.auth(username, password);		
+    this.props.auth(username, password, workspaceId);		
   }
 
 	onSetSign(event) {
-		this.props.history.pushState(null, "/register");
-    // this.props.onSetSign(event);
+		const search = this.props.location.search;
+		const params = new URLSearchParams(search);
+		const workspaceId = params.get('workspaceId');
+		this.props.history.push({
+      pathname: '/register',
+      search: '?workspaceId=' + workspaceId,
+    })
   }
 
 	onLoginFB(event) {

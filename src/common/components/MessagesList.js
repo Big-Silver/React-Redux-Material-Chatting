@@ -22,9 +22,7 @@ class MessagesList extends Component {
         });
 
         const addMessage = data => {
-            console.log(data);
             this.setState({messages: [...this.state.messages, data]});
-            console.log(this.state.messages);
         };
 
         this.sendMessage = ev => {
@@ -39,7 +37,7 @@ class MessagesList extends Component {
     }
 
     componentWillMount() {
-        this.props.init_message();
+        this.props.init_message();        
     };
 
     componentWillReceiveProps(nextProps) {
@@ -82,7 +80,6 @@ class MessagesList extends Component {
                     }
                 }
             }            
-            console.log('message: ', total_group);        
         }, 100);
     };
 
@@ -91,9 +88,9 @@ class MessagesList extends Component {
             <div className="row">
                 <div className="col-12">
                     <div className="messages">
-                        {this.state.messages != [] && this.state.messages.map(message => {
+                        {this.state.messages != [] && this.state.messages.map(function(message, i) {
                             return (
-                                <div>{message.user}: {message.message} : {message.date}</div>
+                                <div key={i}>{message.user}: {message.message} : {message.date}</div>
                             )
                         })}
                     </div>

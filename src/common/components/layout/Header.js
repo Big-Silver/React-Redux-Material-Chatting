@@ -21,17 +21,24 @@ class Header extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {open: true};
+		this.state = {
+			open: true,
+			users: []
+		};
 		this.handleToggle = this.handleToggle.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleWorkspace = this.handleWorkspace.bind(this);
 	}
 
 	componentWillMount() {
-    	// this.props.getUserInfo();
+		// this.props.getUserInfo();			
 	};
 	
 	componentWillReceiveProps(nextProps) {
+		this.setState({
+			users: this.props.user.users
+		})
+		console.log('users: ', this.state.users);
 	}
 
 	handleLogout() {
@@ -67,7 +74,6 @@ class Header extends Component {
 				{ <LeftNav class="layout_nav_bar" style={{paddingTop:'70px'}} open={this.state.open}>
 					{/*{!user.info && <Link to="/login"><MenuItem>Login</MenuItem></Link>}
 					{!user.info && <Link to="/register"><MenuItem>Register</MenuItem></Link>}*/}
-					<MenuItem>Register</MenuItem>
 				</LeftNav> }
 			</div>
 		);

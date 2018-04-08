@@ -108,7 +108,7 @@ class Login extends Component {
 				<div className="sign_nav_space1"></div>
 				<div className="sign_nav_space1"></div>
 				<div className="form-button form-login">
-					<RaisedButton label="Login" secondary={true} onClick={this.onSubmit} onTouchTap={this.onSubmit}/>
+					<RaisedButton label="Login" secondary={true} onClick={this.onSubmit}/>
 					<a className="forgot_password" onClick={this.onForgetPassword}>Forgot Password?</a>
 				</div>				
 				<div className="sign_nav_space1"></div>
@@ -137,14 +137,6 @@ class Login extends Component {
     );
   }
 }
-
-// Login.propTypes = {
-//   username: PropTypes.string.isRequired,
-//   password: PropTypes.string,
-//   logged: PropTypes.bool.isRequired,
-//   token: PropTypes.string,
-//   err: PropTypes.object
-// };
 
 function mapStateToProps(state) {
 	const logged = state.user.logged;

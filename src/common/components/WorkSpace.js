@@ -114,9 +114,9 @@ class WorkSpace extends Component {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {this.state.ws_list.map(wk => {
+                {this.state.ws_list.map(function(wk, i) {
                   return (
-                    <TableRow selected={this.isSelected(0)}>
+                    <TableRow key={i}>
                       <TableRowColumn>{wk.fullName}</TableRowColumn>
                       <TableRowColumn>localhost:3002/home</TableRowColumn>
                     </TableRow>

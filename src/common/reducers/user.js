@@ -26,14 +26,12 @@ export default function user(state = initialState, action) {
             return true;
             break;
         case LOGIN_SUCCESS:
-            var user_session = sessionStorage.getItem('rChat_user');
-            if (!user_session) {
-                sessionStorage.setItem('rChat_user', action.req.data[0]._id);
-                sessionStorage.setItem('rUser_name', action.req.data[0].name);
-            }
-            return {
+            var user_session = sessionStorage.getItem('rChat_user');            
+            sessionStorage.setItem('rChat_user', action.req.data[0]._id);
+            sessionStorage.setItem('rUser_name', action.req.data[0].name);
+            return Object.assign({}, state, {
                 logged: true
-            }
+            });
             break;
         case LOGIN_FAILURE:
             return Object.assign({}, state, {
@@ -56,14 +54,11 @@ export default function user(state = initialState, action) {
             break;
         case REGISTER_USER_SUCCESS:
             var user_session = sessionStorage.getItem('rChat_user');
-            if (!user_session) {
-                sessionStorage.setItem('rChat_user', action.req.data._id);
-                sessionStorage.setItem('rUser_name', action.req.data.name);
-            }			
-            return {
-                logged: true,
+            sessionStorage.setItem('rChat_user', action.req.data._id);
+            sessionStorage.setItem('rUser_name', action.req.data.name);	
+            return Object.assign({}, state, {
                 signed: true
-            }
+            });
             break;
         case REGISTER_USER_FAILURE:
             return Object.assign({}, state, {
@@ -86,11 +81,12 @@ export default function user(state = initialState, action) {
             });
             break;
         case RESET_PASSWORD_FAILURE:
-            // return Object.assign({}, state, {
-            //     error: action.error.data.ResponseStatus.Message
-            // });
+            return Object.assign({}, state, {
+                error: action.error.data.ResponseStatus.Message
+            });
             break;
         case GET_USER_INFO_SUCCESS:
+            console.log('GET_USER_INFO_SUCCESS: ', action)
             return Object.assign({}, state, {
                 users: action.req.data[0]
             });
@@ -120,10 +116,9 @@ export default function user(state = initialState, action) {
             return true;
             break;
         case INIT_MESSAGE_SUCCESS:
-            return {
-                logged: true,
+            return Object.assign({}, state, {
                 messages: action.req.data
-            }
+            });
             break;
         case INIT_MESSAGE_FAILURE:
             return Object.assign({}, state, {
@@ -131,9 +126,9 @@ export default function user(state = initialState, action) {
             });
             break;
         case CREATE_WORKSPACE_SUCCESS:
-            return {
+            return Object.assign({}, state, {
                 created_ws: action.req.data
-            }
+            });
             break;
         case CREATE_WORKSPACE_FAILURE:
             return Object.assign({}, state, {
@@ -141,9 +136,9 @@ export default function user(state = initialState, action) {
             });
             break;
         case INIT_WORKSPACE_SUCCESS:
-            return {
+            return Object.assign({}, state, {
                 workspaces: action.req.data
-            }
+            });
             break;
         case INIT_WORKSPACE_FAILURE:
             return Object.assign({}, state, {

@@ -49,6 +49,10 @@ export const CREATE_WORKSPACE = 'CREATE_WORKSPACE';
 export const CREATE_WORKSPACE_SUCCESS = 'CREATE_WORKSPACE_SUCCESS';
 export const CREATE_WORKSPACE_FAILURE = 'CREATE_WORKSPACE_FAILURE';
 
+export const FIND_WORKSPACE = 'FIND_WORKSPACE';
+export const FIND_WORKSPACE_SUCCESS = 'FIND_WORKSPACE_SUCCESS';
+export const FIND_WORKSPACE_FAILURE = 'FIND_WORKSPACE_FAILURE';
+
 var http_config = {
 	headers: {
 		'Accept': 'application/json',
@@ -165,5 +169,15 @@ export function init_workspaces() {
 	return {
 		type: INIT_WORKSPACE,
 		promise: request.get(`http://${config.apiHost}:${config.apiPort}/init_workspaces`, http_config)
+	}
+}
+
+export function find_workspace(email) {
+	var data = Querystring.stringify({
+		"f_email": email
+	});
+	return {
+		type: FIND_WORKSPACE,
+		promise: request.post(`http://${config.apiHost}:${config.apiPort}/find_workspace`, data, http_config)
 	}
 }

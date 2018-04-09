@@ -15,7 +15,8 @@ import {
         SET_LOGIN, SET_SIGN,
         INIT_MESSAGE, INIT_MESSAGE_SUCCESS, INIT_MESSAGE_FAILURE,
         CREATE_WORKSPACE, CREATE_WORKSPACE_SUCCESS, CREATE_WORKSPACE_FAILURE,
-        INIT_WORKSPACE, INIT_WORKSPACE_SUCCESS, INIT_WORKSPACE_FAILURE
+        INIT_WORKSPACE, INIT_WORKSPACE_SUCCESS, INIT_WORKSPACE_FAILURE,
+        FIND_WORKSPACE, FIND_WORKSPACE_SUCCESS, FIND_WORKSPACE_FAILURE
         } from '../actions/user';
 
 const initialState = { signed: false, logged: false, login: false, sign: false };
@@ -143,6 +144,17 @@ export default function user(state = initialState, action) {
         case INIT_WORKSPACE_FAILURE:
             return Object.assign({}, state, {
                 error: 'Getting Workspace is Failed.'
+            })
+            break;
+        case FIND_WORKSPACE_SUCCESS:
+            // return Object.assign({}, state, {
+
+            // })
+            console.log('find_workspace is success.');
+            break;
+        case FIND_WORKSPACE_FAILURE:
+            return Object.assign({}, state, {
+                error: "Finding the Workspace is Failed."
             })
             break;
         case LOGOUT:

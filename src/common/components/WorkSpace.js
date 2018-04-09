@@ -16,6 +16,7 @@ import {
   TableRowColumn,
 } from 'material-ui/lib/Table';
 import TextField from 'material-ui/lib/text-field';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator/lib';
 import RaisedButton from 'material-ui/lib/raised-button'; 
 
 import * as UserActions from '../actions/user';
@@ -37,6 +38,9 @@ class WorkSpace extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onFind_Workspace = this.onFind_Workspace.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validationhandleChange = this.validationhandleChange.bind(this);
     this.state = {
       ws_list: [],
       value: 'list',
@@ -77,6 +81,22 @@ class WorkSpace extends Component {
     }    
   };
 
+  onFind_Workspace(event) {
+    event.preventDefault();
+    const f_email = this.refs.find_email.getValue();
+    this.props.find_workspace(f_email);
+  }
+
+  handleSubmit(event) {
+    console.log('sfdsdfsdf')
+    event.preventDefault();
+  }
+
+  validationhandleChange(event) {
+    const email = event.target.value;
+    this.setState({ email });
+  }
+
   isSelected = (index) => {
     return this.state.selected.indexOf(index) !== -1;
   };
@@ -98,6 +118,7 @@ class WorkSpace extends Component {
   };
 
   render() {
+    const { email } = this.state;
     return (
       <Tabs
         value={this.state.value}
@@ -123,8 +144,32 @@ class WorkSpace extends Component {
                   )
                 })}
               </TableBody>
-            </Table>
+            </Table>            
           </div>
+          <div>
+            <p>Find Workspace</p>
+            <TextField
+              ref="find_email"
+              hintText="Fill your email"
+              floatingLabelText="Email"
+            />
+            <RaisedButton label="Confirm" secondary={true} onClick={this.onFind_Workspace}/>
+          </div>
+          <ValidatorForm
+            ref="form"
+            onSubmit={this.handleSubmit}
+            onError={errors => console.log(errors)}
+          >
+            <TextValidator
+              floatingLabelText="Email"
+              onChange={this.validationhandleChange}
+              name="email"
+              value={this.state.email}
+              validators={['required', 'isEmail']}
+              errorMessages={['this field is required', 'email is not valid']}
+            />
+            <RaisedButton label="Confirm" type="submit" onClick={this.handleSubmit}/>
+          </ValidatorForm>
         </Tab>
         <Tab label="Create Workspace" value="create">
           <div>

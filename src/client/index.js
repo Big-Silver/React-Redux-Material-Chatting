@@ -67,12 +67,16 @@ function unRequireAuth() {
     // }
 }
 
+function onRequire() {
+    console.log('onRequire: ', store.getState());
+}
+
 ReactDOM.render(
     <Provider store={store}>
             <Router history={history}>
                 <Route path="/" component={ExternalLayout}>
                     <IndexRoute component={WorkSpace} onEnter={unRequireAuth}/>
-                    <Route path="/login" component={LoginPage} />
+                    <Route path="/login" component={LoginPage} onEnter={onRequire}/>
                     <Route path="/register" component={SignupPage} />
                     <Route path="/forget_password" component={ForgetPage} />
                     <Route path="/reset_password" component={ResetPage} />

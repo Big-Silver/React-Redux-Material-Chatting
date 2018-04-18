@@ -4,7 +4,7 @@
 
 ## About
 This project is Redux Material UI using React.js, react-router, Redux, axios and Metronic Topic.
-Making the project with registering, sign in, reSetting password and Management users easily. This Fabric example is written by [Big Silver].
+Making the project with registering, sign in, reSetting password and Management users easily. This React example is written by [Big Silver].
 
 ## Development Installation
 
@@ -29,6 +29,14 @@ Then Visit
 ```bash
 http://localhost:3002
 ```
+
+## Backend
+
+Please setup the following backend project on your end.
+```bash
+https://github.com/Big-Silver/Node-Chat.git
+```
+
 ## Reference
 
 Before the project, you have to change the API address at `package.json`.
